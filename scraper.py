@@ -1,6 +1,12 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup as soup
 
+fav_food = input("What food are you looking for? Use the exact name (case insensitive):")
+
+while not fav_food:
+    fav_food = input("What food are you looking for? Use the exact name (case insensitive):") 
+
+
 url = 'https://hospitality.usc.edu/residential-dining-menus/'
 
 client = urlopen(url)
@@ -11,6 +17,16 @@ html_soup = soup(html, "html.parser")
 
 menus = html_soup.findAll('ul',{'class':'menu-item-list'})
 
+being_served = False
+
 for menu in menus:
     items = menu.li.text
-    print('item: \n', items, '\n\n')
+    if fav_food in items:
+        being_served = True
+
+result = "Yay! That food is being served today!" if being_served else "Sorry, that food is not being served today."
+
+print(result)
+
+
+        
