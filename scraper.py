@@ -5,7 +5,7 @@ fav_food = input("What food are you looking for? Use the exact name (case insens
 
 while not fav_food:
     fav_food = input("What food are you looking for? Use the exact name (case insensitive):") 
-
+fav_food = fav_food.lower()
 
 url = 'https://hospitality.usc.edu/residential-dining-menus/'
 
@@ -20,7 +20,7 @@ menus = html_soup.findAll('ul',{'class':'menu-item-list'})
 being_served = False
 
 for menu in menus:
-    items = menu.li.text
+    items = menu.li.text.lower()
     if fav_food in items:
         being_served = True
 
