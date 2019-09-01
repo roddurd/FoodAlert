@@ -20,8 +20,8 @@ menus = html_soup.findAll('ul',{'class':'menu-item-list'})
 being_served = False
 
 for menu in menus:
-    items = menu.li.text.lower()
-    if fav_food in items:
+    menu = str(menu).lower()
+    if fav_food in menu:
         being_served = True
 
 result = "Yay! That food is being served today!" if being_served else "Sorry, that food is not being served today."
