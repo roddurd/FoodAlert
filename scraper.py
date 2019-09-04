@@ -17,17 +17,20 @@ html_soup = soup(html, "html.parser")
 
 menus = html_soup.findAll('div',{'class':'col-sm-6 col-md-4'})
 
-being_served = []
+being_served_at = []
 
 for menu in menus:
     dining_hall = str(menu.h3.text)
     menu = str(menu).lower()
     if fav_food in menu:
-        being_served.append(dining_hall)
-if being_served:
-    being_served = list(set(being_served))
-    location = " and ".join(being_served) if len(being_served) > 1 else being_served[0]
-result = "Yay! That food is being served at " + location + " today!" if being_served[0] else "Sorry, that food is not being served today."
+        being_served_at.append(dining_hall)
+
+if being_served_at:
+    being_served_at = list(set(being_served_at)) # avoids duplicates
+    location = " and ".join(being_served_at) if len(being_served_at) > 1 else being_served_at[0]
+    result = "Yay! That food is being served at " + location + " today!"
+else:
+    result = "Sorry, that food is not being served today."
 
 print(result)
 
